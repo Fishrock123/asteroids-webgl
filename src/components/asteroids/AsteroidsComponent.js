@@ -122,6 +122,18 @@ class Asteroids extends React.Component {
   }
 
   componentDidMount () {
+  }
+
+  componentWillUnmount () {
+    this.props.overrideHook(this.scatterplot)
+
+    if (typeof this.revokeListeners === 'function') this.revokeListeners()
+    this.game.stop()
+  }
+
+  start () {
+    if (typeof this.revokeListeners === 'function') this.revokeListeners()
+
     this.props.overrideHook(this.interceptor)
 
     const rKeyUp = revokeableListener(document, 'keyup', (e) => {
@@ -202,16 +214,7 @@ class Asteroids extends React.Component {
       rMouseUp()
       rMouseMove()
     }
-  }
 
-  componentWillUnmount () {
-    this.props.overrideHook(this.scatterplot)
-
-    this.revokeListeners()
-    this.game.stop()
-  }
-
-  start () {
     this.setState({ gamestate: 'active' })
     this.game.start()
   }
