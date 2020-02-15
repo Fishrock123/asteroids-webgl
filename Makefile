@@ -15,7 +15,7 @@ build:
 		--outfile build/dev/index.js \
 		--debug
 
-	@echo "Asteroids WebGL has been rebuilt."
+	@echo "Asteroids WebGL has been rebuilt as dev."
 
 build-release:
 	@mkdir -p build/release
@@ -39,7 +39,7 @@ build-release:
 	@#
 	@# @sed -ie "s/index\.js/index\.js\.gz/g" build/release/index.html
 
-	@echo "Asteroids WebGL has been rebuilt."
+	@echo "Asteroids WebGL has been rebuilt as release."
 
 watchify:
 	make build-watchify & make serve-watchify
@@ -69,6 +69,21 @@ build-watchify:
 		--debug \
 		--verbose
 
+confirm:
+	@echo "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+
+release: build-release confirm
+	@echo "Making zip archive"
+
+	@zip -9 build/release/Asteroids.zip \
+		build/release/index.html \
+		build/release/index.css \
+		build/release/index.js
+
+	@echo "Uploading to itch.io"
+
+	@butler push build/release/Asteroids.zip fishrock/asteroids:html5
+
 lint:
 	node_modules/.bin/standard
 
@@ -76,7 +91,7 @@ clean:
 	@rm -rf node_modules
 	@rm -rf build
 
-gitclean:
+gitclean: confirm
 	git clean -fdx
 
-.PHONY: build build-release watchify lint clean gitclean
+.PHONY: build build-release watchify confirm release lint clean gitclean
