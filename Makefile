@@ -34,13 +34,6 @@ build-release:
 		--transform brfs \
 		--outfile build/release/index.js
 
-	@# @-rm -f build/release/index.js.gz
-	@#
-	@# @# -9 is equivalent to --best
-	@# @gzip -v -9 build/release/index.js
-	@#
-	@# @sed -ie "s/index\.js/index\.js\.gz/g" build/release/index.html
-
 	@echo "Asteroids WebGL has been rebuilt as release."
 
 watchify:
