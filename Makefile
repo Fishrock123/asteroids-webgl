@@ -67,10 +67,7 @@ build-watchify:
 		--debug \
 		--verbose
 
-confirm:
-	@echo "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
-
-release: build-release confirm
+release-compress:
 	@echo "Making zip archive"
 
 	@zip -9r build/release/Asteroids.zip \
@@ -79,6 +76,10 @@ release: build-release confirm
 		build/release/index.css \
 		build/release/index.js
 
+confirm:
+	@echo "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+
+release: clean build-release release-compress confirm
 	@echo "Uploading to itch.io"
 
 	@butler push build/release/Asteroids.zip fishrock/asteroids:html5
@@ -87,9 +88,11 @@ lint:
 	node_modules/.bin/standard
 
 clean:
+	@echo "Cleaning build"
+
 	@rm -rf build
 
 gitclean: confirm
 	git clean -fdx
 
-.PHONY: build build-release watchify confirm release lint clean gitclean
+.PHONY: build build-release watchify release-compress confirm release lint clean gitclean
