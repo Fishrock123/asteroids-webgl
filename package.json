@@ -1,7 +1,7 @@
 {
   "name": "asteroids-webgl",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.1",
+  "description": "My first actually published game, developed in late 2017 as an easter egg within NodeSource's Node.js monitoring platform, N|Solid.",
   "scripts": {
     "test": "make lint",
     "build": "make build"
