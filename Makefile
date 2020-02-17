@@ -6,6 +6,7 @@ build:
 
 	@cp web/index.css build/dev/index.css
 	@cp web/index.html build/dev/index.html
+	@cp -r web/fonts build/dev/fonts
 
 	@-rm -f web/index.js.tmp-browserify-*
 	@NODE_ENV=dev time node_modules/.bin/browserify \
@@ -22,6 +23,7 @@ build-release:
 
 	@cp web/index.css build/release/index.css
 	@cp web/index.html build/release/index.html
+	@cp -r web/fonts build/release/fonts
 
 	@echo "running release browserify for app"
 
@@ -45,7 +47,9 @@ watchify:
 	make build-watchify & make serve-watchify
 
 serve-watchify:
-	@echo "serveing web/*"
+	@echo "serving build/dev/*"
+
+	@mkdir -p build/dev
 
 	@cd build/dev
 	node_modules/.bin/live-server \
@@ -59,6 +63,7 @@ build-watchify:
 
 	@cp web/index.css build/dev/index.css
 	@cp web/index.html build/dev/index.html
+	@cp -r web/fonts build/dev/fonts
 
 	@-rm -f web/index.js.tmp-browserify-*
 	@NODE_ENV=dev time node_modules/.bin/watchify \
@@ -75,7 +80,8 @@ confirm:
 release: build-release confirm
 	@echo "Making zip archive"
 
-	@zip -9 build/release/Asteroids.zip \
+	@zip -9r build/release/Asteroids.zip \
+		build/release/fonts \
 		build/release/index.html \
 		build/release/index.css \
 		build/release/index.js
@@ -88,7 +94,6 @@ lint:
 	node_modules/.bin/standard
 
 clean:
-	@rm -rf node_modules
 	@rm -rf build
 
 gitclean: confirm
