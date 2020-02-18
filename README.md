@@ -21,14 +21,14 @@ Those being roughly:
 
 I believe all except the last of those goals were effectively achieved.
 
+Had I had more time, visual scaling would have been fixed and asteroids would have been geometric and not the "process cluster" blurry "areas"/"dots". There is also a vertex array reserved in the code for an unused "aim line".
+
 ## Game Design
 
 I'm not sure if I'd ever actually played the original Asteroids (or any remake).
 At any rate this was intended to only adhere roughly imitate its general design, with "modern" controls, pacing, and difficulty.
 
-Importantly, what was included in the shipped version was dictated by the constrains as described in the Constraints section below.
-
-Had I had more time, visual scaling would have been fixed and asteroids would have been geometric and not the "process cluster" blurry "areas"/"dots". There is also a vertex array reserved in the code for an unused "aim line".
+Importantly, what was included in the shipped version was dictated by the constrains as described in the Constraints section above.
 
 ## Visual Design
 
