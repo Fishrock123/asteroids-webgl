@@ -1,6 +1,6 @@
 # "Asteroids" WebGL
 
-My first actually published game, developed in late 2017 as an easter egg within [NodeSource][]'s Node.js monitoring platform, [N|Solid][].
+My first actually published game, developed over two weekends in late 2017 as an easter egg within [NodeSource][]'s Node.js monitoring platform, [N|Solid][].
 
 **[Playable on itch.io](https://fishrock.itch.io/asteroids-easter-egg)**
 
